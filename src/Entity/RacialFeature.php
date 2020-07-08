@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EffectRepository;
+use App\Repository\RacialFeatureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EffectRepository::class)
+ * @ORM\Entity(repositoryClass=RacialFeatureRepository::class)
  */
-class Effect
+class RacialFeature
 {
     /**
      * @ORM\Id()
@@ -30,13 +30,13 @@ class Effect
     /**
      * @ORM\Column(type="text")
      */
-    private $icon;
+    private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EffectType::class, inversedBy="effects")
+     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="racialFeatures")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private $race;
 
     public function getId(): ?int
     {
@@ -67,26 +67,26 @@ class Effect
         return $this;
     }
 
-    public function getIcon(): ?string
+    public function getImage(): ?string
     {
-        return $this->icon;
+        return $this->image;
     }
 
-    public function setIcon(string $icon): self
+    public function setImage(string $image): self
     {
-        $this->icon = $icon;
+        $this->image = $image;
 
         return $this;
     }
 
-    public function getType(): ?EffectType
+    public function getRace(): ?Race
     {
-        return $this->Type;
+        return $this->race;
     }
 
-    public function setType(?EffectType $type): self
+    public function setRace(?Race $race): self
     {
-        $this->type = $type;
+        $this->race = $race;
 
         return $this;
     }
