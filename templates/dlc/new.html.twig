@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Dlc{% endblock %}
+
+{% block body %}
+    <h1>Create new Dlc</h1>
+
+    {{ include('dlc/_form.html.twig') }}
+
+    <a href="{{ path('dlc_index') }}">back to list</a>
+{% endblock %}

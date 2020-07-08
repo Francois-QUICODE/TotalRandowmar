@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\EffectRepository;
+use App\Repository\UnitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EffectRepository::class)
+ * @ORM\Entity(repositoryClass=UnitRepository::class)
  */
-class Effect
+class Unit
 {
     /**
      * @ORM\Id()
@@ -30,23 +30,18 @@ class Effect
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\ManyToMany(targetEntity=Race::class, mappedBy="units")
      */
-    private $icon;
+    private $races;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EffectType::class, inversedBy="effects")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Lord::class, mappedBy="effects")
+     * @ORM\ManyToMany(targetEntity=Lord::class, mappedBy="startingUnits")
      */
     private $lords;
 
     public function __construct()
     {
+        $this->races = new ArrayCollection();
         $this->lords = new ArrayCollection();
     }
 
@@ -79,26 +74,30 @@ class Effect
         return $this;
     }
 
-    public function getIcon(): ?string
+    /**
+     * @return Collection|Race[]
+     */
+    public function getRaces(): Collection
     {
-        return $this->icon;
+        return $this->races;
     }
 
-    public function setIcon(string $icon): self
+    public function addRace(Race $race): self
     {
-        $this->icon = $icon;
+        if (!$this->races->contains($race)) {
+            $this->races[] = $race;
+            $race->addUnit($this);
+        }
 
         return $this;
     }
 
-    public function getType(): ?EffectType
+    public function removeRace(Race $race): self
     {
-        return $this->Type;
-    }
-
-    public function setType(?EffectType $type): self
-    {
-        $this->type = $type;
+        if ($this->races->contains($race)) {
+            $this->races->removeElement($race);
+            $race->removeUnit($this);
+        }
 
         return $this;
     }
@@ -115,7 +114,7 @@ class Effect
     {
         if (!$this->lords->contains($lord)) {
             $this->lords[] = $lord;
-            $lord->addEffect($this);
+            $lord->addStartingUnit($this);
         }
 
         return $this;
@@ -125,7 +124,7 @@ class Effect
     {
         if ($this->lords->contains($lord)) {
             $this->lords->removeElement($lord);
-            $lord->removeEffect($this);
+            $lord->removeStartingUnit($this);
         }
 
         return $this;

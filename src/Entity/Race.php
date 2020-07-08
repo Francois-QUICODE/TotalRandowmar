@@ -29,9 +29,23 @@ class Race
      */
     private $racialFeatures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Lord::class, mappedBy="race")
+     */
+    private $lords;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Unit::class, inversedBy="races")
+     */
+    private $units;
+
+
     public function __construct()
     {
         $this->racialFeatures = new ArrayCollection();
+        $this->heroes = new ArrayCollection();
+        $this->lords = new ArrayCollection();
+        $this->units = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +91,63 @@ class Race
             if ($racialFeature->getRace() === $this) {
                 $racialFeature->setRace(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lord[]
+     */
+    public function getLords(): Collection
+    {
+        return $this->lords;
+    }
+
+    public function addLord(Lord $lord): self
+    {
+        if (!$this->lords->contains($lord)) {
+            $this->lords[] = $lord;
+            $lord->setRace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLord(Lord $lord): self
+    {
+        if ($this->lords->contains($lord)) {
+            $this->lords->removeElement($lord);
+            // set the owning side to null (unless already changed)
+            if ($lord->getRace() === $this) {
+                $lord->setRace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Unit[]
+     */
+    public function getUnits(): Collection
+    {
+        return $this->units;
+    }
+
+    public function addUnit(Unit $unit): self
+    {
+        if (!$this->units->contains($unit)) {
+            $this->units[] = $unit;
+        }
+
+        return $this;
+    }
+
+    public function removeUnit(Unit $unit): self
+    {
+        if ($this->units->contains($unit)) {
+            $this->units->removeElement($unit);
         }
 
         return $this;

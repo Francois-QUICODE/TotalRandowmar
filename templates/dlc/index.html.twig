@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dlc index{% endblock %}
+
+{% block body %}
+    <h1>Dlc index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dlc in dlcs %}
+            <tr>
+                <td>{{ dlc.id }}</td>
+                <td>{{ dlc.name }}</td>
+                <td>{{ dlc.description }}</td>
+                <td>
+                    <a href="{{ path('dlc_show', {'id': dlc.id}) }}">show</a>
+                    <a href="{{ path('dlc_edit', {'id': dlc.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('dlc_new') }}">Create new</a>
+{% endblock %}

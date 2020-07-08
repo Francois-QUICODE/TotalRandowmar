@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dlc{% endblock %}
+
+{% block body %}
+    <h1>Edit Dlc</h1>
+
+    {{ include('dlc/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('dlc_index') }}">back to list</a>
+
+    {{ include('dlc/_delete_form.html.twig') }}
+{% endblock %}

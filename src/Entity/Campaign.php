@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\EffectRepository;
+use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EffectRepository::class)
+ * @ORM\Entity(repositoryClass=CampaignRepository::class)
  */
-class Effect
+class Campaign
 {
     /**
      * @ORM\Id()
@@ -25,23 +25,12 @@ class Effect
     private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $icon;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=EffectType::class, inversedBy="effects")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Lord::class, mappedBy="effects")
+     * @ORM\ManyToMany(targetEntity=Lord::class, mappedBy="campaign")
      */
     private $lords;
 
@@ -79,30 +68,6 @@ class Effect
         return $this;
     }
 
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(string $icon): self
-    {
-        $this->icon = $icon;
-
-        return $this;
-    }
-
-    public function getType(): ?EffectType
-    {
-        return $this->Type;
-    }
-
-    public function setType(?EffectType $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Lord[]
      */
@@ -115,7 +80,7 @@ class Effect
     {
         if (!$this->lords->contains($lord)) {
             $this->lords[] = $lord;
-            $lord->addEffect($this);
+            $lord->addCampaign($this);
         }
 
         return $this;
@@ -125,7 +90,7 @@ class Effect
     {
         if ($this->lords->contains($lord)) {
             $this->lords->removeElement($lord);
-            $lord->removeEffect($this);
+            $lord->removeCampaign($this);
         }
 
         return $this;
