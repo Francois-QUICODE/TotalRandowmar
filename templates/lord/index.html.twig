@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lord index{% endblock %}
+
+{% block body %}
+    <h1>Lord index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Portrait</th>
+                <th>Faction</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lord in lords %}
+            <tr>
+                <td>{{ lord.id }}</td>
+                <td>{{ lord.name }}</td>
+                <td>{{ lord.portrait }}</td>
+                <td>{{ lord.faction}}</td>
+                <td>
+                    <a href="{{ path('lord_show', {'id': lord.id}) }}">show</a>
+                    <a href="{{ path('lord_edit', {'id': lord.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('lord_new') }}">Create new</a>
+{% endblock %}

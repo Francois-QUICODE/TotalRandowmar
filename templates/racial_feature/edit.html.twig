@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RacialFeature{% endblock %}
+
+{% block body %}
+    <h1>Edit RacialFeature</h1>
+
+    {{ include('racial_feature/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('racial_feature_index') }}">back to list</a>
+
+    {{ include('racial_feature/_delete_form.html.twig') }}
+{% endblock %}

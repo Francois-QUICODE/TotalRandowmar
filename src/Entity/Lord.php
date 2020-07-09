@@ -56,6 +56,13 @@ class Lord
      */
     private $startingUnits;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $faction;
+
+
+
     public function __construct()
     {
         $this->campaign = new ArrayCollection();
@@ -190,6 +197,18 @@ class Lord
         if ($this->startingUnits->contains($startingUnit)) {
             $this->startingUnits->removeElement($startingUnit);
         }
+
+        return $this;
+    }
+
+    public function getFaction(): ?string
+    {
+        return $this->faction;
+    }
+
+    public function setFaction(string $faction): self
+    {
+        $this->faction = $faction;
 
         return $this;
     }

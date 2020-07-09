@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RacialFeature index{% endblock %}
+
+{% block body %}
+    <h1>RacialFeature index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for racial_feature in racial_features %}
+            <tr>
+                <td>{{ racial_feature.id }}</td>
+                <td>{{ racial_feature.name }}</td>
+                <td>{{ racial_feature.description }}</td>
+                <td>{{ racial_feature.image }}</td>
+                <td>
+                    <a href="{{ path('racial_feature_show', {'id': racial_feature.id}) }}">show</a>
+                    <a href="{{ path('racial_feature_edit', {'id': racial_feature.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('racial_feature_new') }}">Create new</a>
+{% endblock %}

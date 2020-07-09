@@ -39,6 +39,12 @@ class Race
      */
     private $units;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Dlc::class, inversedBy="races")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $dlc;
+
 
     public function __construct()
     {
@@ -149,6 +155,23 @@ class Race
         if ($this->units->contains($unit)) {
             $this->units->removeElement($unit);
         }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function getDlc(): ?Dlc
+    {
+        return $this->dlc;
+    }
+
+    public function setDlc(?Dlc $dlc): self
+    {
+        $this->dlc = $dlc;
 
         return $this;
     }

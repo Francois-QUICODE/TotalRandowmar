@@ -40,9 +40,15 @@ class Dlc
      */
     private $lords;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Race::class, mappedBy="dlc")
+     */
+    private $races;
+
     public function __construct()
     {
         $this->lords = new ArrayCollection();
+        $this->races = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +117,42 @@ class Dlc
             // set the owning side to null (unless already changed)
             if ($lord->getDlc() === $this) {
                 $lord->setDlc(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Collection|Race[]
+     */
+    public function getRaces(): Collection
+    {
+        return $this->races;
+    }
+
+    public function addRace(Race $race): self
+    {
+        if (!$this->races->contains($race)) {
+            $this->races[] = $race;
+            $race->setDlc($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRace(Race $race): self
+    {
+        if ($this->races->contains($race)) {
+            $this->races->removeElement($race);
+            // set the owning side to null (unless already changed)
+            if ($race->getDlc() === $this) {
+                $race->setDlc(null);
             }
         }
 

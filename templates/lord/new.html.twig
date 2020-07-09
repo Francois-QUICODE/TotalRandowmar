@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lord{% endblock %}
+
+{% block body %}
+    <h1>Create new Lord</h1>
+
+    {{ include('lord/_form.html.twig') }}
+
+    <a href="{{ path('lord_index') }}">back to list</a>
+{% endblock %}

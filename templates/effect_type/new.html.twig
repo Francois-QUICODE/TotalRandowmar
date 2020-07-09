@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EffectType{% endblock %}
+
+{% block body %}
+    <h1>Create new EffectType</h1>
+
+    {{ include('effect_type/_form.html.twig') }}
+
+    <a href="{{ path('effect_type_index') }}">back to list</a>
+{% endblock %}

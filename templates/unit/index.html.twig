@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dlc index{% endblock %}
+{% block title %}Unit index{% endblock %}
 
 {% block body %}
-    <h1>Dlc index</h1>
+    <h1>Unit index</h1>
 
     <table class="table">
         <thead>
@@ -11,20 +11,18 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Game</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for dlc in dlcs %}
+        {% for unit in units %}
             <tr>
-                <td>{{ dlc.id }}</td>
-                <td>{{ dlc.name }}</td>
-                <td>{{ dlc.description }}</td>
-                <td>{{ dlc.game }}</td>
+                <td>{{ unit.id }}</td>
+                <td>{{ unit.name }}</td>
+                <td>{{ unit.description }}</td>
                 <td>
-                    <a href="{{ path('dlc_show', {'id': dlc.id}) }}">show</a>
-                    <a href="{{ path('dlc_edit', {'id': dlc.id}) }}">edit</a>
+                    <a href="{{ path('unit_show', {'id': unit.id}) }}">show</a>
+                    <a href="{{ path('unit_edit', {'id': unit.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('dlc_new') }}">Create new</a>
+    <a href="{{ path('unit_new') }}">Create new</a>
 {% endblock %}
