@@ -7,7 +7,6 @@ use App\Entity\Lord;
 use App\Entity\Race;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,12 +21,19 @@ class LordType extends AbstractType
             ->add('dlc', EntityType::class, [
                 'class' => Dlc::class,
                 'multiple' => false,
-                'group_by' => ChoiceList::groupBy($this, 'game')
+                'group_by' => function (Dlc $dlc)
+                {
+                    return $dlc->getGame();
+                }
+
             ])
             ->add('race', EntityType::class, [
                 'class' => Race::class,
                 'multiple' => false,
-                'group_by' => ChoiceList::groupBy($this, 'dlc')
+                'group_by' => function (Race $race)
+                {
+                    return $race->getDlc()->getGame() ." - ". $race->getDlc();
+                }
 
             ])
             ->add('campaign', null, [

@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Game</th>
+                <th>Dlc</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +20,9 @@
             <tr>
                 <td>{{ race.id }}</td>
                 <td>{{ race.name }}</td>
+                <td>{{ race.dlc.game }}</td>
+                <td>{{ race.dlc }}</td>
+
                 <td>
                     <a href="{{ path('race_show', {'id': race.id}) }}">show</a>
                     <a href="{{ path('race_edit', {'id': race.id}) }}">edit</a>
