@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}EffectType index{% endblock %}
+{% block title %}EffectOrigin index{% endblock %}
 
 {% block body %}
-    <h1>EffectType index</h1>
+    <h1>EffectOrigin index</h1>
 
     <table class="table">
         <thead>
@@ -14,13 +14,13 @@
             </tr>
         </thead>
         <tbody>
-        {% for effect_type in effect_types %}
+        {% for effect_origin in effect_origins %}
             <tr>
-                <td>{{ effect_type.id }}</td>
-                <td>{{ effect_type.name }}</td>
+                <td>{{ effect_origin.id }}</td>
+                <td>{{ effect_origin.name }}</td>
                 <td>
-                    <a href="{{ path('effect_type_show', {'id': effect_type.id}) }}">show</a>
-                    <a href="{{ path('effect_type_edit', {'id': effect_type.id}) }}">edit</a>
+                    <a href="{{ path('effect_origin_show', {'id': effect_origin.id}) }}">show</a>
+                    <a href="{{ path('effect_origin_edit', {'id': effect_origin.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('effect_type_new') }}">Create new</a>
+    <a href="{{ path('effect_origin_new') }}">Create new</a>
 {% endblock %}

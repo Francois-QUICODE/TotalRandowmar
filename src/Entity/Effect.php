@@ -35,10 +35,10 @@ class Effect
     private $icon;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EffectType::class, inversedBy="effects")
+     * @ORM\ManyToOne(targetEntity=EffectOrigin::class, inversedBy="effects")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private $origin;
 
     /**
      * @ORM\ManyToMany(targetEntity=Lord::class, mappedBy="effects")
@@ -91,14 +91,14 @@ class Effect
         return $this;
     }
 
-    public function getType(): ?EffectType
+    public function getOrigin(): ?EffectOrigin
     {
-        return $this->Type;
+        return $this->origin;
     }
 
-    public function setType(?EffectType $type): self
+    public function setOrigin(?EffectOrigin $origin): self
     {
-        $this->type = $type;
+        $this->origin = $origin;
 
         return $this;
     }

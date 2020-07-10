@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\EffectType;
+use App\Entity\EffectOrigin;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method EffectType|null find($id, $lockMode = null, $lockVersion = null)
- * @method EffectType|null findOneBy(array $criteria, array $orderBy = null)
- * @method EffectType[]    findAll()
- * @method EffectType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EffectOrigin|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EffectOrigin|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EffectOrigin[]    findAll()
+ * @method EffectOrigin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EffectTypeRepository extends ServiceEntityRepository
+class EffectOriginRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EffectType::class);
+        parent::__construct($registry, EffectOrigin::class);
     }
 
     // /**
-    //  * @return EffectType[] Returns an array of EffectType objects
+    //  * @return EffectOrigin[] Returns an array of EffectOrigin objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EffectTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?EffectType
+    public function findOneBySomeField($value): ?EffectOrigin
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

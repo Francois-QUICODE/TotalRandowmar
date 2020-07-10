@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\EffectType;
+use App\Entity\EffectOrigin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EffectTypeType extends AbstractType
+class EffectOriginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,7 @@ class EffectTypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => EffectType::class,
+            'data_class' => EffectOrigin::class,
         ]);
     }
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EffectOrigin{% endblock %}
+
+{% block body %}
+    <h1>EffectOrigin</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ effect_origin.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ effect_origin.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('effect_origin_index') }}">back to list</a>
+
+    <a href="{{ path('effect_origin_edit', {'id': effect_origin.id}) }}">edit</a>
+
+    {{ include('effect_origin/_delete_form.html.twig') }}
+{% endblock %}

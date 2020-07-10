@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\EffectTypeRepository;
+use App\Repository\EffectOriginRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EffectTypeRepository::class)
+ * @ORM\Entity(repositoryClass=EffectOriginRepository::class)
  */
-class EffectType
+class EffectOrigin
 {
     /**
      * @ORM\Id()
@@ -63,7 +63,7 @@ class EffectType
     {
         if (!$this->effects->contains($effect)) {
             $this->effects[] = $effect;
-            $effect->setType($this);
+            $effect->setOrigin($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class EffectType
         if ($this->effects->contains($effect)) {
             $this->effects->removeElement($effect);
             // set the owning side to null (unless already changed)
-            if ($effect->getType() === $this) {
-                $effect->setType(null);
+            if ($effect->getOrigin() === $this) {
+                $effect->setOrigin(null);
             }
         }
 

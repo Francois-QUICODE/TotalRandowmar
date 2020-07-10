@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EffectOrigin{% endblock %}
+
+{% block body %}
+    <h1>Edit EffectOrigin</h1>
+
+    {{ include('effect_origin/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('effect_origin_index') }}">back to list</a>
+
+    {{ include('effect_origin/_delete_form.html.twig') }}
+{% endblock %}
