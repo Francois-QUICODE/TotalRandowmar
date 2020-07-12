@@ -15,6 +15,7 @@ class LordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('game')
             ->add('name')
             ->add('faction')
             ->add('portrait')

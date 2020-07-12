@@ -35,10 +35,16 @@ class Game
      */
     private $dlcs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Lord::class, mappedBy="game")
+     */
+    private $lords;
+
     public function __construct()
     {
         $this->heroes = new ArrayCollection();
         $this->dlcs = new ArrayCollection();
+        $this->lords = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,5 +111,36 @@ class Game
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Lord[]
+     */
+    public function getLords(): Collection
+    {
+        return $this->lords;
+    }
+
+    public function addLord(Lord $lord): self
+    {
+        if (!$this->lords->contains($lord)) {
+            $this->lords[] = $lord;
+            $lord->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLord(Lord $lord): self
+    {
+        if ($this->lords->contains($lord)) {
+            $this->lords->removeElement($lord);
+            // set the owning side to null (unless already changed)
+            if ($lord->getGame() === $this) {
+                $lord->setGame(null);
+            }
+        }
+
+        return $this;
     }
 }

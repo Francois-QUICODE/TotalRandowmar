@@ -61,6 +61,12 @@ class Lord
      */
     private $faction;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="lords")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $game;
+
 
 
     public function __construct()
@@ -209,6 +215,18 @@ class Lord
     public function setFaction(string $faction): self
     {
         $this->faction = $faction;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }
