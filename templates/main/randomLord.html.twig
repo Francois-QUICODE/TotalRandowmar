@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Total War Lord Randomizer
+{% endblock %}
+
+{% block body %}
+
+<h1>Coucou</h1>
+
+<h2>{{ lord.name }}</h2> 
+
+<div>
+    <ul>
+        <li>
+            Faction : <strong>{{ lord.faction }}</strong>
+        </li>
+        <li>
+            Game : {{ lord.game }}
+        </li>
+        <li>
+            Race : {{ lord.race }}
+        </li>
+    </ul>
+    <a href=" {{ path('random_lord') }}">
+        <button>New Random</button>
+    </a>
+</div>
+
+{% endblock %}
