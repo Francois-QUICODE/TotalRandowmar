@@ -19,7 +19,7 @@ class LordRepository extends ServiceEntityRepository
         parent::__construct($registry, Lord::class);
     }
 
-    public function getRandomLord(): Lord
+    public function FindRandomLord(): Lord
     {
         $lord = $this->createQueryBuilder('l')
             ->orderBy('RAND()')
@@ -30,32 +30,44 @@ class LordRepository extends ServiceEntityRepository
         return $lord;
     }
 
-    /**
-        public function getRandomLordBy(string $keyword, string $option): Lord
-        {
-            $lords = $this->createQueryBuilder('lords')
-                ->select('lords');
-    
-            if (isset($option)) {
-                switch ($option) {
-                    case 'value':
-                        # code...
-                        break;
-    
-                    default:
-                        # code...
-                        break;
-                }
-            }
-    
-            $lords->setParameter('keyword', $keyword)
+    public function FindRandomLordByGame(string $gameId)
+    {
+        $lord = $this->createQueryBuilder('l')
+            ->andWhere('l.game = :game')
+            ->setParameter('game', $gameId)
+            ->orderBy('RAND()')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
-    
-            rand($lords);
-        }
-    */
+            
+            return $lord;
+        /**
+        $lord = $this->createQueryBuilder('l')
+        ->select('l');
 
+        if (isset($option)) {
+        switch ($option) {
+        case 'game':
+        $lord = $lord->where('l.game = :keyword');
+        break;
+
+        default:
+        # code...
+        break;
+        }
+        }
+
+        $lord = $lord->setParameter('keyword', $keyword)
+        ->orderBy('RAND()')
+        ->setMaxResults('1')
+        ->getQuery()
+        ->getOneOrNullResult();
+
+        return $lord;
+
+         */
+
+    }
 
     /**
      * @return Lord[] Returns an array of Lord objects
